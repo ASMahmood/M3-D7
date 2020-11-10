@@ -99,22 +99,19 @@
                                 <p class="card-text">Website: ${
                                   person.website
                                 }</p>
-                                <p class="card-text">Suite: ${
+                                <p class="card-text"> ${
                                   person.address.suite
                                 }</p>
-                                <p class="card-text">Street: ${
+                                <p class="card-text"> ${
                                   person.address.street
                                 }</p>
-                                <p class="card-text">City: ${
+                                <p class="card-text"> ${
                                   person.address.city
                                 }</p>
-                                <p class="card-text">Zipcode: ${
+                                <p class="card-text"> ${
                                   person.address.zipcode
                                 }</p>
-                                <p class="card-text">Street: ${
-                                  person.address.street
-                                }</p>
-                                <p class="card-text">Geo: ${
+                                <p class="card-text"> ${
                                   person.address.geo.lat +
                                   ", " +
                                   person.address.geo.lng
@@ -171,6 +168,29 @@
           } else {
             console.log(element.firstElementChild.firstElementChild.innerText)
           }
+          })
+
+      }
+
+      const pickAdress = function () {
+        let card = document.querySelectorAll(".card")
+        let result = ""
+
+          card.forEach(element => {
+          if(element.className.includes("d-none")) {
+          } else {
+            let children = element.firstElementChild.childNodes
+            let Suite = children[13].innerText
+            let Street = children[15].innerText
+            let City = children[17].innerText
+            let Zipcode = children[19].innerText
+            let Geo = children[21].innerText
+
+            let fullAdress = Suite.concat(", ", Street, ", ", City, ", ", Zipcode, ", ", Geo)
+
+            result = fullAdress
+          }
+          console.log(result)
           })
 
       }

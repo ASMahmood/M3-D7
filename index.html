@@ -158,6 +158,26 @@
           });
         }
       };
+
+
+      const pickNames = function () {
+        //document.querySelectorAll(".card")
+        let card = document.querySelectorAll(".card")
+        let result = []
+
+          card.forEach(element => {
+          //  console.log(element)
+          if(element.className.includes("d-none")) {
+          } else {
+            console.log(element.firstElementChild.firstElementChild.innerText)
+          }
+          })
+
+      }
+
+
+
+
     </script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

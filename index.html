@@ -52,12 +52,13 @@
               <option value="username">Username</option>
               <option value="email">Email</option>
           </select>
-        <input
-          type="text"
-          class="form-control"
-          aria-label="Text input with dropdown button"
-          id="searchbar"
-        />
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Text input with dropdown button"
+            id="searchbar"
+          />
+          <button type="button" class="btn btn-primary">Sort</button>
       </div>
     </nav>
 
@@ -194,6 +195,30 @@
           })
 
       }
+
+      const sortCards = function () {
+        let card = document.querySelectorAll(".card")
+        let cardsDisplayedNames = []
+        let cardsDisplayed
+
+        card.forEach(element => {
+          //  console.log(element)
+          if(element.className.includes("d-none")) {
+          } else {
+            cardsDisplayedNames.push(element.firstElementChild.firstElementChild.innerText)
+          }
+          })
+        console.log(cardsDisplayedNames)
+        let descending = cardsDisplayedNames.sort()
+        console.log(descending)
+
+        let orderedCards = []
+        card.forEach(element => {
+          let cardName = element.firstElementChild.firstElementChild
+          
+        })
+      }
+      
 
 
 

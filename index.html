@@ -44,9 +44,27 @@
     -->
   </head>
   <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend mx-auto">
+          <select name="search" id="search">
+              <option value="name">Name</option>
+              <option value="username">Username</option>
+              <option value="email">Email</option>
+          </select>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Text input with dropdown button"
+          id="searchbar"
+        />
+      </div>
+    </nav>
+
     <div class="container">
       <div class="row justify-content-center"></div>
     </div>
+
     <script>
       window.onload = async function () {
         const infoObj = await fetch(
@@ -54,7 +72,10 @@
         );
         const infoArr = await infoObj.json();
         console.log(infoArr);
-        appendInfo(infoArr);
+        await appendInfo(infoArr);
+
+        let searchbar = await document.querySelector("#searchbar");
+        searchbar.onchange = () => searchFilter();
       };
 
       const appendInfo = function (arr) {
@@ -101,6 +122,41 @@
                             </div>`;
           targetRow.appendChild(card);
         });
+      };
+
+      const searchFilter = function () {
+        let searchtype = document.querySelector("select").value
+        let input = document.querySelector("#searchbar").value.toLowerCase();
+        let cards = document.querySelectorAll(".card");
+        let searchQuery = [];
+
+        cards.forEach((element) => {
+            if(searchtype === "name") {
+                searchQuery.push(element.firstElementChild.firstElementChild);
+            } else if (searchtype === "username") {
+                searchQuery.push(element.firstElementChild.firstElementChild.nextElementSibling);
+            } else if (searchtype === "email") {
+                searchQuery.push(element.firstElementChild.firstElementChild.nextElementSibling.nextElementSibling);
+            }
+          
+        });
+        if (input.length >= 1) {
+          cards.forEach((card) => {
+            card.classList.add("d-none");
+          });
+          const matchingsearchQuery = searchQuery.filter((name) =>
+            name.innerText.toLowerCase().includes(input)
+          );
+          const fitleredCards = matchingsearchQuery.map(
+            (name) => name.parentNode.parentNode
+          );
+
+          fitleredCards.forEach((card) => card.classList.remove("d-none"));
+        } else {
+          cards.forEach((card) => {
+            card.classList.remove("d-none");
+          });
+        }
       };
     </script>
     <script

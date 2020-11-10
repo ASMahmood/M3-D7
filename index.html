@@ -44,6 +44,65 @@
     -->
   </head>
   <body>
+    <div class="container">
+      <div class="row justify-content-center"></div>
+    </div>
+    <script>
+      window.onload = async function () {
+        const infoObj = await fetch(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        const infoArr = await infoObj.json();
+        console.log(infoArr);
+        appendInfo(infoArr);
+      };
+
+      const appendInfo = function (arr) {
+        let targetRow = document.querySelector(".row");
+        arr.forEach((person) => {
+          const card = document.createElement("div");
+          card.className = "card my-2 mx-1";
+          card.innerHTML = `
+                            <div class="card-body">
+                                <h5 class="card-title text-center">${
+                                  person.name
+                                }</h5>
+                                <p class="card-text">Username: ${
+                                  person.username
+                                }</p>
+                                <p class="card-text">Email: ${person.email}</p>
+                                <p class="card-text">Phone: ${person.phone}</p>
+                                <p class="card-text">Company: ${
+                                  person.company.name
+                                }</p>
+                                <p class="card-text">Website: ${
+                                  person.website
+                                }</p>
+                                <p class="card-text">Suite: ${
+                                  person.address.suite
+                                }</p>
+                                <p class="card-text">Street: ${
+                                  person.address.street
+                                }</p>
+                                <p class="card-text">City: ${
+                                  person.address.city
+                                }</p>
+                                <p class="card-text">Zipcode: ${
+                                  person.address.zipcode
+                                }</p>
+                                <p class="card-text">Street: ${
+                                  person.address.street
+                                }</p>
+                                <p class="card-text">Geo: ${
+                                  person.address.geo.lat +
+                                  ", " +
+                                  person.address.geo.lng
+                                }</p>
+                            </div>`;
+          targetRow.appendChild(card);
+        });
+      };
+    </script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
